@@ -76,10 +76,7 @@ naive_substring_match(const char *pattern, const char *doc, int *first_match_ind
  * i.e. The return value should be 
  * 256^(m-1)*charbuf[0] + 256^(m-2)*charbuf[1] + ... + charbuf[m-1],
  * where 256^(m-1) means 256 raised to the power m-1.
- * Note that all operations *, +, - are modulo arithematic, so you 
- * should use the provided functions mmul, madd, msub.
- * (We use "long long" to represent an RK hash)
- */
+*/
 long long
 rkhash_init(const char *charbuf, int m, long long *h)
 {
@@ -96,7 +93,6 @@ rkhash_init(const char *charbuf, int m, long long *h)
 /* Given the rabin-karp hash value (curr_hash) over substring Y[i],Y[i+1],...,Y[i+m-1]
  * calculate the hash value over Y[i+1],Y[i+2],...,Y[i+m] = curr_hash * 256 - leftmost * h + rightmost
  * where h is 256 raised to the power m (and given as an argument).  
- * Note that *,-,+ refers to modular arithematic so you should use mmul, msub, madd.
  */
 long long 
 rkhash_next(long long curr_hash, long long h, char leftmost, char rightmost)
@@ -108,9 +104,6 @@ rkhash_next(long long curr_hash, long long h, char leftmost, char rightmost)
  * the "pattern" has been found, using the Rabin-karp substring matching algorithm.
  * Both pattern and doc are null-terminated C strings. The function also stores
  * the first position where pattern is found in the int variable pointed to by first_match_ind
- *
- * Note: You should implement the Rabin-Karp algorithm by completing the 
- * rkhash_init and rkhash_next functions and then use them here.
 */
 int
 rk_substring_match(const char *pattern, const char *doc, int *first_match_ind)
@@ -155,7 +148,6 @@ rk_substring_match(const char *pattern, const char *doc, int *first_match_ind)
 /* rk_create_doc_bloom returns a pointer to a newly created bloom_filter. 
  * The new bloom filter is populated with all n-m+1 rabin-karp hashes for 
  * all the substrings of length m in "doc".
- * Hint: use the provided bloom_init() and your implementation of bloom_add() here.
  */
 bloom_filter *
 rk_create_doc_bloom(int m, const char *doc, int bloom_size)
